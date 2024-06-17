@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List </title>
+<style>
+  /* Basic css styling */
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    width: 100%;
+    height: 100vh;
+    margin: 5px;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMWPCm7qR_lF0Wt11453BwfXDu52zPdq_hrA&s");
+    font-family: 'Arial', sans-serif;
+}
+  .container {
+    max-width: 630px;
+    height: 570px;
+    margin:auto;
+    background-image:url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLH773icjAPwjirF4cU6p7fD7-qPm9XzfGJw&s");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 30px;
+  }
+  
+   h2{
+    font-size: 40px;
+    margin-bottom: 30px;
+    font-family: cursive;
+    color: white;
+    text-align: center;
+   }
+
+  .container #new-task{
+    flex: 1;
+    border: none;
+    outline: none;
+    background-color:white;
+    color:black;
+    padding: 20px;
+    font-weight: 14px;
+    border-radius: 30px;
+    margin-left: 20px;
+  }
+
+  #priority,#due-date{
+    flex: 1;
+    border: none;
+    outline: none;
+    background-color:white;
+    color: black;
+    padding: 20px;
+    font-weight: 14px;
+    border-radius: 30px;
+  }
+  
+  button{
+    border: none;
+    outline: none;
+    padding: 10px;
+    background: rgb(52, 207, 207);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-left: 5px;
+  }
+
+  button:hover{
+    background-color: blueviolet;
+  }
+  
+  .task {
+    background: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    margin-top: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .task.completed {
+    text-decoration: line-through;
+    color: black;
+  }
+  .navbar{
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+}
+.navbar .title{
+    color:brown;
+    font-size: 40px;
+    font-family:cursive;
+    margin-left: 40px;
+    
+}
+.menu li{
+    display: inline-block;
+    margin-left: 80px;
+}
+.menu li a{
+    text-decoration: none;
+    color:black;
+    font-size: 20px;
+    transition: all 0.4s ease-in;
+    margin-right: 10px;
+    white-space: 10px;
+}
+.menu li a:hover{
+    color: rgb(253, 78, 113);
+    padding: 8px,30px;
+    text-decoration: underline;
+}
+
+</style>
+</head>
+
+
+<!--html code-->
+<body>
+  <div class="navbar">
+        <h1 class="title">To-Do Page</h1>
+      <ul class="menu">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact Us</a></li>
+      </ul>
+      </div>
+      <div class="container">
+  <h2>To-Do List</h2>
+  <input type="text" id="new-task" placeholder="What needs to be done?">
+  <select id="priority">
+    <option value="High">High</option>
+    <option value="Medium">Medium</option>
+    <option value="Low">Low</option>
+  </select>
+  <input type="date" id="due-date">
+  <button onclick="addTask()">Add Task</button>
+  <div id="tasks"></div>
+</div>
+
+
+
+<script>
+  //javascript code
+  function addTask() {
+    var taskDesc = document.getElementById('new-task').value;
+    var priority = document.getElementById('priority').value;
+    var dueDate = document.getElementById('due-date').value;
+    if (taskDesc) {
+      var task = document.createElement('div');
+      task.className = 'task';
+      task.innerHTML = `
+        <span>${taskDesc} [${priority}]  [Due: ${dueDate}]</span>
+        <button onclick="markComplete(this)">Complete</button>
+        <button onclick="deleteTask(this)">Delete</button>
+      `;
+      document.getElementById('tasks').appendChild(task);
+      document.getElementById('new-task').value = '';
+    }
+  }
+
+  function markComplete(btn) {
+    var task = btn.parentNode;
+    task.classList.toggle('completed');
+  }
+
+  function deleteTask(btn) {
+    var task = btn.parentNode;
+    task.remove();
+  }
+</script>
+</body>
+</html>
